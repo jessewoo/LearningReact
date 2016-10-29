@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
@@ -8,11 +9,12 @@ import VideoDetail from './components/video_detail';
 const API_KEY = ''
 
 // Converted into Class Component
-// Top Level Component
+// Top Level Component - concept of STATE
 class App extends Component {
 	constructor(props) {
 		super(props);
 
+		// Localized State, component level
 		this.state = {
 			videos: [] ,
 			selectedVideo: null
@@ -34,11 +36,15 @@ class App extends Component {
 	}
 
 	render() {
+		// Created a function, passed it to debounce. Debounce takes inner function, returns a new function only called every 300ms. Trottle user search
+		const videoSearch = _.debounce((term) => { this.videoSearch(term) }, 300);
+
+		// CALLBACK
 		return (
 			// When there is a Search Bar change, it will take term and do YouTube Search
 			// Take that search, passed it into SearchBar, into the property onSearchTermChange
 			<div>
-				<SearchBar onSearchTermChange={term => this.videoSearch(term)}/>
+				<SearchBar onSearchTermChange={videoSearch}/>
 				<VideoDetail video={this.state.selectedVideo}/>
 				<VideoList
 				// Takes a video and updates the video, pass this as a property into VideoList

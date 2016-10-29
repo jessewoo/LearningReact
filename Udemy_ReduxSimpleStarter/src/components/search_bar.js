@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 // Class Component
+// STATE - change state, component re-renders
 class SearchBar extends Component {
   constructor(props) {
     super(props);

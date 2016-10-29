@@ -1,6 +1,7 @@
 import React from 'react';
 import VideoListItem from './video_list_item'
 
+// Functional Component that takes property, return static info
 const VideoList = (props) => {
   // var array = [1,2,3];
   // array.map(function(number) { return number*2 });

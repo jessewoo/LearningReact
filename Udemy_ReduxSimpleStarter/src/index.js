@@ -9,8 +9,10 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 
+		// Starts at zero
 		this.state = { videos: [] };
 
+		// Kick off a network request, arbitrary amount of time to get data from the network. In between time it take, rendered videos. 0 => 5 videos
 		YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
 			this.setState({ videos });
 			//  this.setState({videos: videos});

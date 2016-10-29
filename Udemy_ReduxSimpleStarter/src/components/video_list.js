@@ -1,4 +1,5 @@
 import React from 'react';
+import VideoListItem from './video_list_item'
 
 // Functional component
 // Those videos props will arrive as arguments

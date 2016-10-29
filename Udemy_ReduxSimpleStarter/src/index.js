@@ -18,7 +18,14 @@ class App extends Component {
 			selectedVideo: null
 		};
 
-		YTSearch({key: API_KEY, term: 'surfboards'}, (videos) => {
+		this.videoSearch('surfboards');
+
+	}
+
+	// Function Video Search
+	// Refactor search to a function, takes in a single string
+	videoSearch(term) {
+		YTSearch({key: API_KEY, term: term}, (videos) => {
 			this.setState({
 				videos: videos,
 				selectedVideo: videos[0]
@@ -28,8 +35,10 @@ class App extends Component {
 
 	render() {
 		return (
+			// When there is a Search Bar change, it will take term and do YouTube Search
+			// Take that search, passed it into SearchBar, into the property onSearchTermChange
 			<div>
-				<SearchBar />
+				<SearchBar onSearchTermChange={term => this.videoSearch(term)}/>
 				<VideoDetail video={this.state.selectedVideo}/>
 				<VideoList
 				// Takes a video and updates the video, pass this as a property into VideoList

@@ -7,8 +7,14 @@ const VideoList = (props) => {
   // [2,4,6]
 
 // Always add a key
+// VideoList takes that property, and passes into videolistItem
   const videoItems = props.videos.map((video) => {
-    return <VideoListItem key={video.etag} video={video} />
+    return (
+      <VideoListItem
+        onVideoSelect={props.onVideoSelect}
+        key={video.etag}
+        video={video} />
+    );
   });
 
   // If you had a stack of cardstock with no index, you would have to update the entire stack. If there is index, you can just update that specific cardstock. Each video has an etag.

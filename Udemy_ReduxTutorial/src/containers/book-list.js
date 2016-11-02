@@ -2,16 +2,24 @@ import React, { Component } from 'react';
 // The glue between Redux and React (not developed in tantem, separate libraries)
 import { connect } from 'react-redux';
 import { selectBook } from '../actions/index';
-import { bindActionCreator } from 'redux';
+import { bindActionCreators } from 'redux';
+
+// Successfully hook up ActionCreator with container
 
 // Connect action with booklist
 
 // A Container is a component that is aware of the state contained in Redux
+// First step - clicking on a book will trigger an action Creator
 class BookList extends Component {
   renderList() {
     return this.props.books.map((book) => {
       return (
-        <li key={book.title} className="list-group-item">{book.title}</li>
+        <li
+          key={book.title}
+          onClick={() => this.props.selectBook(book)}
+          className="list-group-item">
+          {book.title}
+        </li>
       );
     });
   }
@@ -37,7 +45,8 @@ function mapStateToProps(state) {
   };
 }
 
-// Anything returned from this function will end up as props on the Booklist container. We are passing in key - selectBook, value - selectBook. Whatever is pass thru, the retun will be available in the container
+// Anything returned from this function will end up as props on the Booklist container.
+// We are passing in key - selectBook, value - selectBook. Whatever is pass thru, the retun will be available in the container
 function mapDispatchToProps(dispatch) {
   // Whenever selectBook is called, the result should be passed to all of our reducers. If select Button is click, I want to make sure data is flow thru the dispatch function
   // Dispatch function receives all the action, spits them all back to reducers

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchWeather } from '../actions/index';
 
-export default class Search extends Component {
+class SearchBar extends Component {
   // Need to construct the state
   constructor(props) {
     super(props);
@@ -10,6 +13,7 @@ export default class Search extends Component {
     // Take the input function, bind it to this, replace existing function with it.
     // Ovewriting locate method
     this.onInputChange = this.onInputChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   onInputChange(event) {
@@ -20,6 +24,10 @@ export default class Search extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
+
+    // We need to go and fetch weather data
+    this.props.fetchWeather(this.state.term);
+    this.setState({ term: '' });
   }
 
   // If there is a callback that makes a reference to 'this', you need to bind it
@@ -39,3 +47,11 @@ export default class Search extends Component {
     )
   }
 }
+
+// This causes an Action Creator
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchWeather }, dispatch);
+}
+
+// Doesn't maintain any state
+export default connect(null, mapDispatchToProps) (SearchBar);

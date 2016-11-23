@@ -5,17 +5,10 @@ import App from './components/app';
 
 import PostsIndex from './components/posts_index'
 
-const Greeting = () => {
-  return <div>Hey There!</div>;
-};
-
 // App = root container of our application
 // IndexRoute - overrides the "/" page
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={PostsIndex} />
-    <Route path="greet" component={Greeting} />
-    <Route path="greet2" component={Greeting} />
-    <Route path="greet3" component={Greeting} />
   </Route>
 );

@@ -3,14 +3,8 @@ import React, { Component } from 'react';
 // Declares a new class, plain JS object
 class SearchBar extends Component {
   render() {
-    return <input onChange = {this.onInputChange}/>;
+    return <input onChange = {event => console.log(event.target.value)}/>;
   }
-
-  onInputChange() {
-
-  }
-
-
 }
 
 export default SearchBar;

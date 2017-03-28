@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { fetchWeather } from '../actions/index'
 
-export default class SearchBar extends Component {
+class SearchBar extends Component {
   // Initialize the start state
   constructor(props) {
     super(props);
@@ -15,7 +15,7 @@ export default class SearchBar extends Component {
     // Bind that function to 'this', which is SearchBar. Replace it with the bound instance of that function
     // TAKE the existing function, bind it to 'this' and REPLACE the existing function with it. Overwriting this local method.
     this.onInputChange = this.onInputChange.bind(this)
-
+    this.onFormSubmit = this.onFormSubmit.bind(this)
   }
 
   onInputChange(event) {
@@ -31,6 +31,8 @@ export default class SearchBar extends Component {
     event.preventDefault()
 
     // We need to go and fetch weather data
+    this.props.fetchWeather(this.state.term);
+    this.setState({ term: ''})
   }
 
 // Controlled field
@@ -49,3 +51,9 @@ export default class SearchBar extends Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators( { fetchWeather }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(SearchBar);

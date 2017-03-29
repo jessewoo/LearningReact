@@ -2,9 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+// Replace App
 import { Router, browserHistory } from 'react-router';
+
 import reducers from './reducers';
 import routes from './routes';
+
 import promise from 'redux-promise';
 
 // Use promises before going to reducers

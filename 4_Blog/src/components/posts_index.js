@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 // Refactor from a functional component to a class based component
 class PostsIndex extends Component {
   componentWillMount() {
-    // console.log('Good time to call Action Creator to fetch posts')
+    console.log('Good time to call Action Creator to fetch posts')
     this.props.fetchPosts();
   }
   render() {

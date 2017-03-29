@@ -6,7 +6,6 @@ import App from './components/app';
 import PostsIndex from './components/posts_index';
 import PostsNew from './components/posts_new';
 
-
 // App = root container of our application
 // IndexRoute - overrides the "/" page
 export default (

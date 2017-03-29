@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Sparklines, SparklinesLine, SparklinesBars, SparklinesReferenceLine } from 'react-sparklines'
+import Chart from '../components/chart'
 
 class WeatherList extends Component {
 
@@ -12,28 +12,20 @@ class WeatherList extends Component {
     const pressure = cityData.list.map(weather => weather.main.pressure)
     const humidity = cityData.list.map(weather => weather.main.humidity)
 
+// Refactored out Chart component - pattern DRY, don't replicate
     return(
       <tr key={name}>
         <td className="col-md-3">
           {name}
         </td>
         <td className="col-md-3">
-          <Sparklines height={60} width={90} data={temps}>
-            <SparklinesBars />
-            <SparklinesReferenceLine type="mean" />
-          </Sparklines>
+          <Chart data={temps} color="orange"/>
         </td>
         <td className="col-md-3">
-          <Sparklines height={60} width={90} data={pressure}>
-            <SparklinesBars />
-            <SparklinesReferenceLine type="mean" />
-          </Sparklines>
+          <Chart data={pressure} color="black"/>
         </td>
         <td className="col-md-3">
-          <Sparklines height={60} width={90} data={humidity}>
-            <SparklinesLine color="black" />
-            <SparklinesReferenceLine type="mean" />
-          </Sparklines>
+          <Chart data={humidity} color="red"/>
         </td>
       </tr>
     );
@@ -54,7 +46,6 @@ class WeatherList extends Component {
           {this.props.weather.map(this.renderWeather)}
         </tbody>
       </table>
-
     );
   }
 }

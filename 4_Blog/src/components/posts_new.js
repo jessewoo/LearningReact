@@ -1,15 +1,29 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { createPost } from '../actions/index';
 import { Link } from 'react-router';
 
 // Usually the form fields are in the Component level, but this time around it's pulling it into the Application level
 class PostsNew extends Component {
+  static contextTypes = {
+    router: PropTypes.object
+  };
+
+  onSubmit(props) {
+    this.props.createPost(props)
+      .then(() => {
+          // blog post has been created, navigate user to the index
+          // We navigate by calling this.context.router.push with the new path to navigate to
+          this.context.router.push('/');
+      });
+
+  }
+
   render() {
       const { fields: {title, categories, content}, handleSubmit } = this.props;
       // console.log(title);
       return (
-        <form onSubmit={handleSubmit(this.props.createPost)}>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <h3>Create A New Post</h3>
 
           <div className={`form-group ${title.touched && title.invalid ? 'has-danger' : ''}`}>

@@ -1,0 +1,28 @@
+{
+  "name": "appengine-weather-app",
+  "description": "React Redux implementation of a weather app - Node.js for Google App Engine Flexible Environment.",
+  "version": "1.0.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "author": "Jesse Woo",
+  "engines": {
+    "node": ">=4.3.2"
+  },
+  "scripts": {
+    "deploy": "gcloud app deploy",
+    "start": "node app.js",
+    "lint": "repo-tools lint",
+    "pretest": "npm run lint",
+    "system-test": "repo-tools test app",
+    "test": "npm run system-test",
+    "e2e-test": "repo-tools test deploy"
+  },
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "4.16.2",
+    "request": "^2.86.0"
+  },
+  "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "2.2.1"
+  }
+}
